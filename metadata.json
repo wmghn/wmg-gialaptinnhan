@@ -1,0 +1,7 @@
+{
+  "name": "Messenger Chat Simulator",
+  "description": "A professional-grade Facebook Messenger chat simulator for creating high-quality social media content and mockups.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
