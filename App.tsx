@@ -388,8 +388,8 @@ export default function App() {
                             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-sm ${getReactionStyle(r.emoji)}`}
                           >
                             <span>{r.emoji}</span>
-                            <span className="text-slate-700 font-medium">
-                              {r.names.join(', ')}
+                            <span className="text-slate-700 font-medium whitespace-pre">
+                              {r.names.join(',  ')}
                             </span>
                           </div>
                         ))}
