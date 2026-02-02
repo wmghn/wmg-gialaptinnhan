@@ -109,6 +109,15 @@ export default function App() {
     if (selectedMessageId === id) setSelectedMessageId(null);
   };
 
+  const updateMessageText = (messageId: string, newText: string) => {
+    setMessages(messages.map(m => {
+      if (m.id === messageId) {
+        return { ...m, text: newText };
+      }
+      return m;
+    }));
+  };
+
   const updateReaction = (messageId: string, emoji: string, namesStr: string) => {
     const names = namesStr.split(',').map(n => n.trim()).filter(n => n !== '');
     setMessages(messages.map(m => {
@@ -258,9 +267,20 @@ export default function App() {
           <h2 className="text-lg font-semibold mb-2 text-blue-800 flex items-center gap-2">
             <Smile size={20} /> Quản lý Cảm xúc
           </h2>
-          {selectedMessageId ? (
+          {selectedMessageId && selectedMessage ? (
             <div className="space-y-4">
               <p className="text-xs text-blue-600 font-medium italic truncate">Đang sửa: "{selectedMessage.text}"</p>
+
+              {/* Edit Message Text */}
+              <div className="flex flex-col gap-1">
+                <label className="text-xs font-bold">Nội dung tin nhắn:</label>
+                <textarea
+                  value={selectedMessage.text}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => updateMessageText(selectedMessageId, e.target.value)}
+                  className="w-full p-2 text-sm border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-500 outline-none min-h-[60px]"
+                />
+              </div>
+
               {['😍', 'OK', '❤️', '👏', '👍'].map(emoji => {
                 const group = selectedMessage?.reactions.find((r: ReactionGroup) => r.emoji === emoji);
                 return (
